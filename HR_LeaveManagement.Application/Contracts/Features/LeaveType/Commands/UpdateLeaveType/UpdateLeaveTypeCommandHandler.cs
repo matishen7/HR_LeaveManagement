@@ -19,10 +19,10 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.U
             // validate request
             // convert  request to domain object
 
-            var leaveTypeToCreate = mapper.Map<Domain.LeaveType>(request);
+            var leaveTypeToUpdate = mapper.Map<Domain.LeaveType>(request);
 
-            // add to db
-            await leaveTypeRepository.UpdateAsync(leaveTypeToCreate);
+            // update db
+            await leaveTypeRepository.UpdateAsync(leaveTypeToUpdate);
 
             // return id
 
