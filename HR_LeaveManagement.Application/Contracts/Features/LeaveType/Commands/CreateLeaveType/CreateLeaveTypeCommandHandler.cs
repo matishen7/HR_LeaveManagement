@@ -18,14 +18,14 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.C
         public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
         {
             // validate request
-            var validator = new CreateLeaveTypeCommandValidator();
+            var validator = new CreateLeaveTypeCommandValidator(leaveTypeRepository);
             var validationResult = validator.ValidateAsync(request);
             if (validationResult.Result.Errors.Any())
             {
                 throw new BadRequestException("Invalid LeaveType", validationResult.Result);
             }
+            
             // convert  request to domain object
-
             var leaveTypeToCreate = mapper.Map<Domain.LeaveType>(request);
 
             // add to db
