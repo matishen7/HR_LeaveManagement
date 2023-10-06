@@ -2,8 +2,8 @@
 {
     public abstract class BaseEntity
     {
-        public DateTime? EndDate { get; set; }
+        public DateTime? DateModified { get; set; }
         public int Id { get; set; }
-        public DateTime? StartDate { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }
