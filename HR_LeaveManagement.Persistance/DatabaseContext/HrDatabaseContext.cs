@@ -17,15 +17,7 @@ namespace HR_LeaveManagement.Persistance.DatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HrDatabaseContext).Assembly);
-            modelBuilder.Entity<LeaveType>().HasData(
-                new LeaveType()
-                {
-                    Id = 1,
-                    Name = "Vacation",
-                    DateCreated = DateTime.Now,
-                    DateModified = DateTime.Now,
-                    DefaultDays = 10
-                });
+            
             base.OnModelCreating(modelBuilder);
         }
 
