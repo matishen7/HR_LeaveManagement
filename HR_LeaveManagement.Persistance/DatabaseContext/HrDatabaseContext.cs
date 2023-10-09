@@ -14,6 +14,21 @@ namespace HR_LeaveManagement.Persistance.DatabaseContext
         DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         DbSet<LeaveRequest> LeaveRequests { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HrDatabaseContext).Assembly);
+            modelBuilder.Entity<LeaveType>().HasData(
+                new LeaveType()
+                {
+                    Id = 1,
+                    Name = "Vacation",
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    DefaultDays = 10
+                });
+            base.OnModelCreating(modelBuilder);
+        }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseEntity>()
