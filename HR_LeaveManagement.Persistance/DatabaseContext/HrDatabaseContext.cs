@@ -10,7 +10,7 @@ namespace HR_LeaveManagement.Persistance.DatabaseContext
 
         }
 
-        DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
         DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         DbSet<LeaveRequest> LeaveRequests { get; set; }
 

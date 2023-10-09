@@ -6,7 +6,7 @@ namespace HR_LeaveManagement.Persistance.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly HrDatabaseContext _context;
+        protected readonly HrDatabaseContext _context;
 
         public GenericRepository(HrDatabaseContext context)
         {
