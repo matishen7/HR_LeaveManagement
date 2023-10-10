@@ -1,6 +1,7 @@
 ﻿using HR_LeaveManagement.Application.Contracts.Persistence;
 using HR_LeaveManagement.Domain;
 using HR_LeaveManagement.Persistance.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace HR_LeaveManagement.Persistance.Repositories
 {
@@ -10,6 +11,29 @@ namespace HR_LeaveManagement.Persistance.Repositories
         {
         }
 
+        public async Task<LeaveRequest> GetLeaveRequestWithDetails(int id)
+        {
+            var leaveRequest = await _context.LeaveRequests
+                .Include(q => q.LeaveType)
+                .FirstOrDefaultAsync(q => q.Id == id);
+            return leaveRequest;
+        }
 
+        public async Task<List<LeaveRequest>> GetLeaveRequestWithDetails()
+        {
+            var leaveRequest = await _context.LeaveRequests
+                .Include(q => q.LeaveType)
+                .ToListAsync();
+            return leaveRequest;
+        }
+
+        public async Task<List<LeaveRequest>> GetLeaveRequestWithDetails(string userId)
+        {
+            var leaveRequest = await _context.LeaveRequests
+                .Where(q => q.RequestingEmployeeId == userId)
+                .Include(q => q.LeaveType)
+                .ToListAsync();
+            return leaveRequest;
+        }
     }
 }
