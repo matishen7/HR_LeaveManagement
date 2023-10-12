@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.UpdateLeaveType
 {
-    public class UpdateLeaveTypeCommandHandlerValidator : AbstractValidator<UpdateLeaveTypeCommand>
+    public class UpdateLeaveTypeCommandValidator : AbstractValidator<UpdateLeaveTypeCommand>
     {
         private readonly ILeaveTypeRepository leaveTypeRepository;
-        public UpdateLeaveTypeCommandHandlerValidator(ILeaveTypeRepository leaveTypeRepository)
+        public UpdateLeaveTypeCommandValidator(ILeaveTypeRepository leaveTypeRepository)
         {
             RuleFor(p => p.Id)
                 .NotEmpty()
