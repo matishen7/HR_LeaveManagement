@@ -26,7 +26,7 @@ namespace HR_LeaveManagement.Infrastructure.EmailService
 
             var message = MailHelper.CreateSingleEmail(from, to, email.Subject, email.Body, email.Body);
             var response = await client.SendEmailAsync(message);
-            return HttpStatusCode.OK == response.StatusCode || HttpStatusCode.Accepted == response.StatusCode;
+            return response.IsSuccessStatusCode;
         }
     }
 }
