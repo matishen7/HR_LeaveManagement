@@ -8,6 +8,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.Ge
 {
     public class LeaveTypeDto
     {
+        public int id { get; set; }
         public int DefaultDays { get; set; }
         public string Name { get; set; } = string.Empty;
     }
