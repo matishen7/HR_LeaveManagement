@@ -56,7 +56,7 @@ namespace HR_LeaveManagement.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<Unit> Delete(int id)
         {
-            var deleteLeaveTypeCommand = new DeleteLeaveTypeCommand() { Id = id};
+            var deleteLeaveTypeCommand = new DeleteLeaveTypeCommand() { Id = id };
             return await mediator.Send(deleteLeaveTypeCommand);
         }
     }
