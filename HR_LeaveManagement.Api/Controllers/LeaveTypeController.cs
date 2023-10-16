@@ -30,6 +30,8 @@ namespace HR_LeaveManagement.Api.Controllers
 
         // GET api/<LeaveTypeController>/5
         [HttpGet("{id}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<LeaveTypeDetailsDto>> Get(int id)
         {
             var getLeaveTypeDetailsQuery = new GetLeaveTypeDetailsQuery(id);
