@@ -9,6 +9,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Quer
 {
     public class LeaveAllocationDetailsDto
     {
+        public int Id { get; set; }
         public int NumberOfDays { get; set; }
         public LeaveTypeDto? LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
