@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Queries.GetAllLeaveAllocation
 {
-    public class GetLeaveAllocationListHandler : IRequestHandler<GetLeaveAllocationQuery, List<LeaveAllocationDto>
+    public class GetLeaveAllocationListHandler : IRequestHandler<GetLeaveAllocationQuery, List<LeaveAllocationDto>>
     {
         private readonly IMapper mapper;
         private readonly ILeaveAllocationRepository leaveAllocationRepository;
