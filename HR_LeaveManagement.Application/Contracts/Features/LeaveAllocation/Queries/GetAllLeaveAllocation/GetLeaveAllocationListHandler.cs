@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Queries.GetAllLeaveAllocation
 {
-    public class GetLeaveAllocationListHandler : IRequestHandler<GetLeaveAllocationQuery, List<LeaveAllocationDto>>
+    public class GetLeaveAllocationListHandler : IRequestHandler<GetLeaveAllocationListQuery, List<LeaveAllocationDto>>
     {
         private readonly IMapper mapper;
         private readonly ILeaveAllocationRepository leaveAllocationRepository;
@@ -20,10 +20,10 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Quer
             this.mapper = mapper;
             this.leaveAllocationRepository = leaveAllocationRepository;
         }
-        public async Task<List<LeaveAllocationDto>> Handle(GetLeaveAllocationQuery request, CancellationToken cancellationToken)
+        public async Task<List<LeaveAllocationDto>> Handle(GetLeaveAllocationListQuery request, CancellationToken cancellationToken)
         {
             // query database
-            var leaveAllocations = await leaveAllocationRepository.GetAsync();
+            var leaveAllocations = await leaveAllocationRepository.GetLeaveAllocationWithDetails();
 
 
             // convert data and map to DTO object
