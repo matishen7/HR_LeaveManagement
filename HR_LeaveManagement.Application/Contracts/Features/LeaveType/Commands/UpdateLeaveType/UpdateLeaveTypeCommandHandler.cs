@@ -11,11 +11,11 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.U
     {
         private readonly IMapper mapper;
         private readonly ILeaveTypeRepository leaveTypeRepository;
-        private readonly IAppLogger<CreateLeaveTypeCommandHandler> logger;
+        private readonly IAppLogger<UpdateLeaveTypeCommandHandler> logger;
 
         public UpdateLeaveTypeCommandHandler(IMapper mapper, 
             ILeaveTypeRepository leaveTypeRepository,
-            IAppLogger<CreateLeaveTypeCommandHandler> logger)
+            IAppLogger<UpdateLeaveTypeCommandHandler> logger)
         {
             this.mapper = mapper;
             this.leaveTypeRepository = leaveTypeRepository;

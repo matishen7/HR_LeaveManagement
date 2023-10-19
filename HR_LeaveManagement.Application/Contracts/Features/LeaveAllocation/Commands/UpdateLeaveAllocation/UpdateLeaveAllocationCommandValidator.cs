@@ -14,7 +14,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Comm
         {
             RuleFor(p => p.NumberOfDays)
                 .GreaterThan(0)
-                .WithMessage("{PropertyName} must greater than {ComparisonValue}");
+                .WithMessage("{PropertyName} must be greater than {ComparisonValue}");
 
             RuleFor(p => p.Period)
                 .GreaterThanOrEqualTo(DateTime.Now.Year)

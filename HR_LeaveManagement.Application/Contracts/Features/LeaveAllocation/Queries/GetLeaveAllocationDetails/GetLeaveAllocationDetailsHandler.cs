@@ -17,11 +17,11 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Quer
     {
         private readonly IMapper mapper;
         private readonly ILeaveAllocationRepository leaveAllocationRepository;
-        private readonly IAppLogger<GetLeaveTypeDetailsHandler> logger;
+        private readonly IAppLogger<GetLeaveAllocationDetailsHandler> logger;
 
         public GetLeaveAllocationDetailsHandler(IMapper mapper, 
             ILeaveAllocationRepository leaveAllocationRepository,
-            IAppLogger<GetLeaveTypeDetailsHandler> logger)
+            IAppLogger<GetLeaveAllocationDetailsHandler> logger)
         {
             this.mapper = mapper;
             this.leaveAllocationRepository = leaveAllocationRepository;
