@@ -12,5 +12,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Comm
         public int Id { get; set; }
         public int NumberOfDays { get; set; }
         public int Period { get; set; }
+
+        public int LeaveTypeId { get; set; }
     }
 }
