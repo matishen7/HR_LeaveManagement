@@ -39,6 +39,5 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Comm
 
             return Unit.Value;
         }
-    {
     }
 }
