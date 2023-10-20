@@ -1,39 +1,30 @@
 ﻿using AutoMapper;
-using FluentValidation;
-using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.CreateLeaveType;
 using HR_LeaveManagement.Application.Contracts.Logging;
 using HR_LeaveManagement.Application.Contracts.Persistence;
 using HR_LeaveManagement.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Commands.CreateLeaveAllocation
 {
-    public class CreateLeaveAllocationHandler : IRequestHandler<CreateLeaveAllocationCommand, Unit>
+    public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAllocationCommand, int>
     {
         private readonly IMapper mapper;
         private readonly ILeaveTypeRepository leaveTypeRepository;
         private readonly ILeaveAllocationRepository leaveAllocationRepository;
-        private readonly IAppLogger<CreateLeaveTypeCommandHandler> logger;
+        private readonly IAppLogger<CreateLeaveAllocationCommandHandler> logger;
 
-        public CreateLeaveAllocationHandler(IMapper mapper,
+        public CreateLeaveAllocationCommandHandler(IMapper mapper,
             ILeaveTypeRepository leaveTypeRepository,
             ILeaveAllocationRepository leaveAllocationRepository,
-            IAppLogger<CreateLeaveTypeCommandHandler> logger)
+            IAppLogger<CreateLeaveAllocationCommandHandler> logger)
         {
             this.mapper = mapper;
             this.leaveTypeRepository = leaveTypeRepository;
             this.leaveAllocationRepository = leaveAllocationRepository;
             this.logger = logger;
-            {
-            }
         }
 
-        public async Task<Unit> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateLeaveAllocationCommand request, CancellationToken cancellationToken)
         {
             // validate request
             var validator = new CreateLeaveAllocationCommandValidator(leaveTypeRepository);
@@ -55,7 +46,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Comm
 
             // return id
 
-            return Unit.Value;
+            return leaveAllocation.Id;
         }
     }
 }
