@@ -34,7 +34,8 @@ namespace HR_LeaveManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<LeaveAllocationDetailsDto>> Get(int id)
         {
-            var getLeaveAllocationDetailsQuery = new GetLeaveAllocationDetailsQuery().Id = id;
+            var getLeaveAllocationDetailsQuery = new GetLeaveAllocationDetailsQuery();
+            getLeaveAllocationDetailsQuery.Id = id;
             var response = await mediator.Send(getLeaveAllocationDetailsQuery);
             return Ok(response);
         }
@@ -67,7 +68,8 @@ namespace HR_LeaveManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Delete(int id)
         {
-            var deleteLeaveAllocationCommand = new DeleteLeaveAllocationCommand().Id = id;
+            var deleteLeaveAllocationCommand = new DeleteLeaveAllocationCommand();
+            deleteLeaveAllocationCommand.Id = id;
             await mediator.Send(deleteLeaveAllocationCommand);
             return NoContent();
         }
