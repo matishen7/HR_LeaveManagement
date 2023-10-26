@@ -1,6 +1,6 @@
 ﻿using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetAllLeaveTypes;
 
-namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries
+namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries.GetLeaveRequestList
 {
     public class LeaveRequestDto
     {
