@@ -22,7 +22,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Querie
             var leaveRequest = await leaveRequestRepository.GetLeaveRequestWithDetails(request.Id);
             if (leaveRequest == null)
             {
-                throw new NotFoundException(nameof(leaveRequest), request);
+                throw new NotFoundException(nameof(leaveRequest), request.Id);
             }
 
             // convert data and map to DTO object

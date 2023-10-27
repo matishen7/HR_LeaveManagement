@@ -25,7 +25,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
             var leaveRequest = await leaveRequestRepository.GetLeaveRequestWithDetails(request.Id);
             if (leaveRequest == null)
             {
-                throw new NotFoundException(nameof(leaveRequest), request);
+                throw new NotFoundException(nameof(leaveRequest), request.Id);
             }
 
             await leaveRequestRepository.DeleteAsync(leaveRequest);
