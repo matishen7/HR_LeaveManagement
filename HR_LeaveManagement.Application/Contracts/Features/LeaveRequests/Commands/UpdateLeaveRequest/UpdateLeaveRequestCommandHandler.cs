@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using HR_LeaveManagement.Application.Contracts.Email;
-using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries.GetLeaveRequestList;
 using HR_LeaveManagement.Application.Contracts.Logging;
+using HR_LeaveManagement.Application.Contracts.Models.Email;
 using HR_LeaveManagement.Application.Contracts.Persistence;
 using HR_LeaveManagement.Application.Exceptions;
+using HR_LeaveManagement.Domain;
 using MediatR;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest
@@ -39,16 +40,33 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
             if (leaveType == null)
                 throw new NotFoundException(nameof(leaveType), request.LeaveTypeId);
 
-            await mapper.Map(request, leaveRequest);
+            var validator = new UpdateLeaveRequestCommandValidator(leaveRequestRepository, leaveTypeRepository);
+            var validationResult = validator.ValidateAsync(request);
+            if (validationResult.Result.Errors.Any())
+            {
+                logger.LogWarning("Validation errors in update request for {0} and {1}", nameof(LeaveRequest), request.Id);
+                throw new BadRequestException("Invalid LeaveType", validationResult.Result);
+            }
 
+            mapper.Map(request, leaveRequest);
+            await leaveRequestRepository.UpdateAsync(leaveRequest);
 
-            // convert data and map to DTO object
+            try
+            {
+                var email = new EmailMessage()
+                {
+                    To = string.Empty,
+                    Body = $"Your leave request for {request.StartDate} and {request.EndDate} has been updated successfully.",
+                    Subject = "Leave Request Submitted"
+                };
+                await emailSender.SendEmail(email);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning("Error occured while sending email " + ex.Message);
+            }
 
-            var data = mapper.Map<List<LeaveRequestDto>>(leaveRequests);
-
-            // return list of DTO objects data
-
-            return data;
+            return Unit.Value;
         }
     }
 }
