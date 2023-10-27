@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries.GetLeaveRequestList;
-using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries;
-using HR_LeaveManagement.Application.Contracts.Persistence;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HR_LeaveManagement.Application.Contracts.Email;
+using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries.GetLeaveRequestList;
 using HR_LeaveManagement.Application.Contracts.Logging;
+using HR_LeaveManagement.Application.Contracts.Persistence;
+using HR_LeaveManagement.Application.Exceptions;
+using MediatR;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest
 {
@@ -21,7 +16,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
         private readonly IEmailSender emailSender;
         private readonly IAppLogger<UpdateLeaveRequestCommandHandler> logger;
 
-        public UpdateLeaveRequestCommandHandler(IMapper mapper, 
+        public UpdateLeaveRequestCommandHandler(IMapper mapper,
             ILeaveRequestRepository leaveRequestRepository,
             ILeaveTypeRepository leaveTypeRepository,
             IEmailSender emailSender,
@@ -36,7 +31,15 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
         public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
         {
             // query database
-            var leaveRequests = await leaveRequestRepository.GetLeaveRequestWithDetails();
+            var leaveRequest = await leaveRequestRepository.GetLeaveRequestWithDetails(request.Id);
+            if (leaveRequest == null)
+                throw new NotFoundException(nameof(leaveRequest), request.Id);
+
+            var leaveType = await leaveTypeRepository.GetByIdAsync(request.LeaveTypeId);
+            if (leaveType == null)
+                throw new NotFoundException(nameof(leaveType), request.LeaveTypeId);
+
+            await mapper.Map(request, leaveRequest);
 
 
             // convert data and map to DTO object
