@@ -10,6 +10,6 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Create
 {
     public class CreateLeaveRequestCommand : BaseLeaveRequest, IRequest
     {
-        public string RequestComments { get; set; } = string.Empty
+        public string RequestComments { get; set; } = string.Empty;
     }
 }
