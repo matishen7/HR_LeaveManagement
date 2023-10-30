@@ -2,6 +2,7 @@
 using HR_LeaveManagement.Application.Middleware.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using System.Text.Json;
 
 namespace HR_LeaveManagement.Application.Middleware
 {
@@ -65,7 +66,9 @@ namespace HR_LeaveManagement.Application.Middleware
             }
 
             httpContext.Response.StatusCode = (int)statusCode;
-            await httpContext.Response.WriteAsync(problem.ToString());
+            httpContext.Response.ContentType = "application/json";
+            var json = JsonSerializer.Serialize(problem);
+            await httpContext.Response.WriteAsync(json);
         }
     }
 }
