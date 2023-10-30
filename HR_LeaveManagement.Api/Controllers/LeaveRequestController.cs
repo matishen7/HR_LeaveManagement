@@ -53,14 +53,14 @@ namespace HR_LeaveManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateApproval([FromBody] UpdateLeaveRequestApprovalCommand command)
+        public async Task<ActionResult> Put([FromBody] UpdateLeaveRequestApprovalCommand command)
         {
             await mediator.Send(command);
             return NoContent();
         }
 
-        // PUT api/<LeaveRequestController>/5
-        [HttpPut("{id}")]
+        // PUT api/<LeaveRequestController>/Change
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,8 +70,8 @@ namespace HR_LeaveManagement.Api.Controllers
             return NoContent();
         }
 
-        // PUT api/<LeaveRequestController>/5
-        [HttpPut("{id}")]
+        // PUT api/<LeaveRequestController>/Cancel
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
