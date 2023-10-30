@@ -3,7 +3,7 @@ using HR_LeaveManagement.Application.Contracts.Persistence;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest
 {
-    public class UpdateLeaveRequestCommandValidator : AbstractValidator<UpdateLeaveRequestCommand>
+    public class UpdateLeaveRequestCommandValidator : AbstractValidator<UpdateLeaveRequestApprovalCommand>
     {
         private readonly ILeaveRequestRepository leaveRequestRepository;
         private readonly ILeaveTypeRepository leaveTypeRepository;

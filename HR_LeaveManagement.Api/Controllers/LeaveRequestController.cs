@@ -1,4 +1,6 @@
-﻿using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.DeleteLeaveRequest;
+﻿using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.CancelLeaveRequest;
+using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.ChangeLeaveRequest;
+using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.DeleteLeaveRequest;
 using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest;
 using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.CreateLeaveRequest;
 using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Queries;
@@ -51,7 +53,29 @@ namespace HR_LeaveManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Put([FromBody] UpdateLeaveRequestCommand command)
+        public async Task<ActionResult> UpdateApproval([FromBody] UpdateLeaveRequestApprovalCommand command)
+        {
+            await mediator.Send(command);
+            return NoContent();
+        }
+
+        // PUT api/<LeaveRequestController>/5
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Change([FromBody] ChangeLeaveRequestCommand command)
+        {
+            await mediator.Send(command);
+            return NoContent();
+        }
+
+        // PUT api/<LeaveRequestController>/5
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Cancel([FromBody] CancelLeaveRequestCommand command)
         {
             await mediator.Send(command);
             return NoContent();

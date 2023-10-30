@@ -9,7 +9,7 @@ using MediatR;
 
 namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest
 {
-    public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Unit>
+    public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestApprovalCommand, Unit>
     {
         private readonly IMapper mapper;
         private readonly ILeaveRequestRepository leaveRequestRepository;
@@ -29,7 +29,7 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
             this.emailSender = emailSender;
             this.logger = logger;
         }
-        public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateLeaveRequestApprovalCommand request, CancellationToken cancellationToken)
         {
             // query database
             var leaveRequest = await leaveRequestRepository.GetLeaveRequestWithDetails(request.Id);
