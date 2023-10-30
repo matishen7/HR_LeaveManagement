@@ -11,6 +11,5 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Comman
     {
         public int Id { get; set; }
         public string RequestComments { get; set; } = string.Empty;
-        public bool Cancelled { get; set; }
     }
 }
