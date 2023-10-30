@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HR_LeaveManagement.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class LeaveRequestController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -19,13 +21,14 @@ namespace HR_LeaveManagement.Api.Controllers
             this.mediator = mediator;
         }
 
-        // GET: LeaveRequestController
-        public async Task<List<LeaveRequestDto>> Get()
+        // GET api/<LeaveRequestController>
+        [HttpGet]
+        public async Task<List<LeaveRequestDto>> GetAll()
         {
             return await mediator.Send(new GetLeaveRequestListQuery());
         }
 
-        // GET: LeaveRequestController/Details/5
+        // GET api/<LeaveRequestController>/5
         [HttpGet("{id}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -38,7 +41,7 @@ namespace HR_LeaveManagement.Api.Controllers
         }
 
 
-        // POST: LeaveRequestController/Create
+        // POST api/<LeaveRequestController>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -59,8 +62,9 @@ namespace HR_LeaveManagement.Api.Controllers
             return NoContent();
         }
 
-        // PUT api/<LeaveRequestController>/Change
+        // PUT api/<LeaveRequestController>/ChangeRequest
         [HttpPut]
+        [Route("ChangeRequest")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,8 +74,9 @@ namespace HR_LeaveManagement.Api.Controllers
             return NoContent();
         }
 
-        // PUT api/<LeaveRequestController>/Cancel
+        // PUT api/<LeaveRequestController>/CancelRequest
         [HttpPut]
+        [Route("CancelRequest")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
