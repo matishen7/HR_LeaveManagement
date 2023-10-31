@@ -25,7 +25,7 @@ namespace HR_LeaveManagement.Api.Controllers
         [HttpGet]
         public async Task<List<LeaveTypeDto>> Get()
         {
-            return await mediator.Send(new GetLeaveTypeQuery());
+            return await mediator.Send(new GetLeaveTypeListQuery());
         }
 
         // GET api/<LeaveTypeController>/5

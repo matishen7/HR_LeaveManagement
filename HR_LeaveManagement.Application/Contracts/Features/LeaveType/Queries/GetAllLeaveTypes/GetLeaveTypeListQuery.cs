@@ -11,6 +11,6 @@ namespace HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.Ge
     //{
     //}
 
-    public record GetLeaveTypeQuery : IRequest<List<LeaveTypeDto>>;
+    public record GetLeaveTypeListQuery : IRequest<List<LeaveTypeDto>>;
 
 }
