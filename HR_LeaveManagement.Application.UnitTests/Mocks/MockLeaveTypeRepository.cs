@@ -1,4 +1,6 @@
-﻿using HR_LeaveManagement.Application.Contracts.Persistence;
+﻿using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetAllLeaveTypes;
+using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetLeaveTypeDetails;
+using HR_LeaveManagement.Application.Contracts.Persistence;
 using HR_LeaveManagement.Domain;
 using Moq;
 
@@ -32,6 +34,13 @@ namespace HR_LeaveManagement.Application.UnitTests.Mocks
 
             var mockRepo = new Mock<ILeaveTypeRepository>();
             mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(leaveTypes);
+
+            mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                .Returns((LeaveTypeDetailsDto leaveType) =>
+                {
+                    var  lt = leaveTypes.SingleOrDefault(l => l.Id == leaveType.Id);
+                    return lt;
+                });
             mockRepo.Setup(r => r.CreateAsync(It.IsAny<LeaveType>()))
                 .Returns((LeaveType leaveType) =>
                 {
