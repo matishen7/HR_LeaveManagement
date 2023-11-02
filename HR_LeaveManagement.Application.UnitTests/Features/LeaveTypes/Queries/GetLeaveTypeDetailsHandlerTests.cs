@@ -3,6 +3,7 @@ using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetAll
 using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR_LeaveManagement.Application.Contracts.Logging;
 using HR_LeaveManagement.Application.Contracts.Persistence;
+using HR_LeaveManagement.Application.Exceptions;
 using HR_LeaveManagement.Application.MappingProfiles;
 using HR_LeaveManagement.Application.UnitTests.Mocks;
 using Moq;
@@ -34,12 +35,21 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Queries
         }
 
         [Fact]
-        public async Task GetLeaveTypeDetailsTest()
+        public async Task GetLeaveTypeDetailsTest_Success()
         {
             var handler = new GetLeaveTypeDetailsHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             var result = await handler.Handle(new GetLeaveTypeDetailsQuery(1), CancellationToken.None);
             result.ShouldBeOfType<LeaveTypeDetailsDto>();
             result.Id.ShouldBe(1);
+        }
+
+        [Fact]
+        public async Task GetLeaveTypeDetailsTest_NotFound()
+        {
+            
+            var handler = new GetLeaveTypeDetailsHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+            Should.Throw<NotFoundException>(async () => await handler.Handle(new GetLeaveTypeDetailsQuery(4), CancellationToken.None))
+                .Message.ShouldBe("leaveTypeDetails (GetLeaveTypeDetailsQuery { Id = 4 })"); ;
         }
     }
 }
