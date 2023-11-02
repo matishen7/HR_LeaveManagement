@@ -48,7 +48,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
         }
 
         [Fact]
-        public async Task CreateLeaveType_IsLeaveTypeUniqueName_False()
+        public Task CreateLeaveType_IsLeaveTypeUniqueName_False()
         {
             var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
@@ -57,10 +57,11 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
                 DefaultDays = 10,
             }, CancellationToken.None))
                 .Message.ShouldBe("Invalid LeaveType"); ;
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task CreateLeaveType_InvalidLeaveType_DefaultDays()
+        public Task CreateLeaveType_InvalidLeaveType_DefaultDays()
         {
             var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
@@ -69,6 +70,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
                 DefaultDays = 0,
             }, CancellationToken.None))
                 .Message.ShouldBe("Invalid LeaveType"); ;
+            return Task.CompletedTask;
         }
     }
 }
