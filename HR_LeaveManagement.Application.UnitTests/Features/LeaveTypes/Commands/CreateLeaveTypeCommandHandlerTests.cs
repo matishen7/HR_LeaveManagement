@@ -72,5 +72,31 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
                 .Message.ShouldBe("Invalid LeaveType"); ;
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task CreateLeaveType_InvalidLeaveType_DefaultDays_GreaterThan_100()
+        {
+            var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+            Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
+            {
+                Name = Guid.NewGuid().ToString(),
+                DefaultDays = 101,
+            }, CancellationToken.None))
+                .Message.ShouldBe("Invalid LeaveType"); ;
+            return Task.CompletedTask;
+        }
+
+        [Fact]
+        public Task CreateLeaveType_InvalidLeaveType_Name_GreaterThan_70_Characters()
+        {
+            var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+            Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
+            {
+                Name = "DJPuKtgGALZnXgJh04A1vakGFm7B2Vfnn1BgQa7dnbbf6bFiYKahzaAizBLcUV0dYDX3p8R",
+                DefaultDays = 101,
+            }, CancellationToken.None))
+                .Message.ShouldBe("Invalid LeaveType"); ;
+            return Task.CompletedTask;
+        }
     }
 }
