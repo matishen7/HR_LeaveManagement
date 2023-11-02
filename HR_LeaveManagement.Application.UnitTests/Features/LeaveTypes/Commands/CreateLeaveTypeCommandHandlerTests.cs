@@ -58,5 +58,17 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             }, CancellationToken.None))
                 .Message.ShouldBe("Invalid LeaveType"); ;
         }
+
+        [Fact]
+        public async Task CreateLeaveType_InvalidLeaveType_DefaultDays()
+        {
+            var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+            Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
+            {
+                Name = Guid.NewGuid().ToString(),
+                DefaultDays = 0,
+            }, CancellationToken.None))
+                .Message.ShouldBe("Invalid LeaveType"); ;
+        }
     }
 }
