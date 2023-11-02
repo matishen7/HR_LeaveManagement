@@ -48,6 +48,12 @@ namespace HR_LeaveManagement.Application.UnitTests.Mocks
                     leaveTypes.Add(leaveType);
                     return Task.CompletedTask;
                 });
+
+            mockRepo.Setup(r => r.IsLeaveTypeUnique(It.IsAny<string>()))
+            .ReturnsAsync(true);
+
+            mockRepo.Setup(r => r.IsLeaveTypeUnique("Non Unique Name"))
+           .ReturnsAsync(false);
             return mockRepo;
         }
     }
