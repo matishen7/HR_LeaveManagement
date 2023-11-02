@@ -3,6 +3,7 @@ using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.Creat
 using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR_LeaveManagement.Application.Contracts.Logging;
 using HR_LeaveManagement.Application.Contracts.Persistence;
+using HR_LeaveManagement.Application.Exceptions;
 using HR_LeaveManagement.Application.MappingProfiles;
 using HR_LeaveManagement.Application.UnitTests.Mocks;
 using Moq;
@@ -50,13 +51,12 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
         public async Task CreateLeaveType_IsLeaveTypeUniqueName_False()
         {
             var handler = new CreateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
-            var result = await handler.Handle(new CreateLeaveTypeCommand()
+            Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
             {
-                DefaultDays = 10,
                 Name = "Non Unique Name",
-            }, CancellationToken.None);
-
-            result.ShouldBeOfType<int>();
+                DefaultDays = 10,
+            }, CancellationToken.None))
+                .Message.ShouldBe("Invalid LeaveType"); ;
         }
     }
 }
