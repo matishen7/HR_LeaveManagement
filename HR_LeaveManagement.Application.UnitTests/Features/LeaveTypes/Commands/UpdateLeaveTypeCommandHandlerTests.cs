@@ -76,6 +76,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             var handler = new UpdateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             Should.Throw<BadRequestException>(async () => await handler.Handle(new UpdateLeaveTypeCommand()
             {
+                Id = 1,
                 Name = Guid.NewGuid().ToString(),
                 DefaultDays = 0,
             }, CancellationToken.None))
@@ -89,6 +90,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             var handler = new UpdateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             Should.Throw<BadRequestException>(async () => await handler.Handle(new UpdateLeaveTypeCommand()
             {
+                Id = 1,
                 Name = Guid.NewGuid().ToString(),
                 DefaultDays = 101,
             }, CancellationToken.None))
@@ -102,6 +104,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             var handler = new UpdateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             Should.Throw<BadRequestException>(async () => await handler.Handle(new UpdateLeaveTypeCommand()
             {
+                Id = 1,
                 Name = "DJPuKtgGALZnXgJh04A1vakGFm7B2Vfnn1BgQa7dnbbf6bFiYKahzaAizBLcUV0dYDX3p8R",
                 DefaultDays = 10,
             }, CancellationToken.None))
