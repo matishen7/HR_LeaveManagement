@@ -4,7 +4,9 @@ using HR_LeaveManagement.Application.Contracts.Logging;
 using HR_LeaveManagement.Application.Contracts.Persistence;
 using HR_LeaveManagement.Application.MappingProfiles;
 using HR_LeaveManagement.Application.UnitTests.Mocks;
+using MediatR;
 using Moq;
+using Shouldly;
 
 namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
 {
@@ -32,9 +34,11 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             var handler = new UpdateLeaveTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             var result = await handler.Handle(new UpdateLeaveTypeCommand()
             {
+                Id = 1,
                 DefaultDays = 10,
                 Name = Guid.NewGuid().ToString(),
             }, CancellationToken.None);
+            result.ShouldBeOfType<Unit>();
         }
     }
 }
