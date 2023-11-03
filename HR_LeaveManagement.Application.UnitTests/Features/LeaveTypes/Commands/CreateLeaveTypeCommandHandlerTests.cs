@@ -93,7 +93,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
             Should.Throw<BadRequestException>(async () => await handler.Handle(new CreateLeaveTypeCommand()
             {
                 Name = "DJPuKtgGALZnXgJh04A1vakGFm7B2Vfnn1BgQa7dnbbf6bFiYKahzaAizBLcUV0dYDX3p8R",
-                DefaultDays = 101,
+                DefaultDays = 10,
             }, CancellationToken.None))
                 .Message.ShouldBe("Invalid LeaveType"); ;
             return Task.CompletedTask;
