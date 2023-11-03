@@ -51,5 +51,16 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveTypes.Commands
                 .Message.ShouldBe("leaveTypeToDelete (HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.DeleteLeaveType.DeleteLeaveTypeCommand)"); ;
             return Task.CompletedTask;
         }
+
+        [Fact]
+        public Task DeleteLeaveType_NotFound_Id_Empty()
+        {
+            var handler = new DeleteLeaveTypeCommandHandler(_mapper, _mockRepo.Object);
+            Should.Throw<NotFoundException>(async () => await handler.Handle(new DeleteLeaveTypeCommand()
+            {
+            }, CancellationToken.None))
+                .Message.ShouldBe("leaveTypeToDelete (HR_LeaveManagement.Application.Contracts.Features.LeaveType.Commands.DeleteLeaveType.DeleteLeaveTypeCommand)"); ;
+            return Task.CompletedTask;
+        }
     }
 }
