@@ -32,7 +32,7 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveAllocations.Que
         {
             var handler = new GetLeaveAllocationListHandler(_mapper, _mockRepo.Object);
             var result = await handler.Handle(new GetLeaveAllocationListQuery(), CancellationToken.None);
-            result.ShouldBeOfType<LeaveAllocationDto>();
+            result.ShouldBeOfType<List<LeaveAllocationDto>>();
             result.Count.ShouldBe(3);
         }
     }
