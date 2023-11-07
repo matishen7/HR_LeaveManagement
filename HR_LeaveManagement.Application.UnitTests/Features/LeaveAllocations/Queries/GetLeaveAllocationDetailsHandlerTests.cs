@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Queries.GetAllLeaveAllocation;
 using HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails;
+using HR_LeaveManagement.Application.Contracts.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using HR_LeaveManagement.Application.Contracts.Logging;
 using HR_LeaveManagement.Application.Contracts.Persistence;
+using HR_LeaveManagement.Application.Exceptions;
 using HR_LeaveManagement.Application.MappingProfiles;
 using HR_LeaveManagement.Application.UnitTests.Mocks;
 using Moq;
@@ -34,6 +36,15 @@ namespace HR_LeaveManagement.Application.UnitTests.Features.LeaveAllocations.Que
             var handler = new GetLeaveAllocationDetailsHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
             var result = await handler.Handle(new GetLeaveAllocationDetailsQuery() { Id = 1}, CancellationToken.None);
             result.ShouldBeOfType<LeaveAllocationDetailsDto>();
+        }
+
+        [Fact]
+        public void GetLeaveAllocationDetails_NotFound()
+        {
+
+            var handler = new GetLeaveAllocationDetailsHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+            Should.Throw<NotFoundException>(async () => await handler.Handle(new GetLeaveAllocationDetailsQuery() { Id = 4 }, CancellationToken.None))
+                .Message.ShouldBe("leaveAllocationDetails (HR_LeaveManagement.Application.Contracts.Features.LeaveAllocation.Queries.GetLeaveAllocationDetails.GetLeaveAllocationDetailsQuery)"); ;
         }
     }
 }
