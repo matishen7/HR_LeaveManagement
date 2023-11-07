@@ -8,7 +8,7 @@ using HR_LeaveManagement.Application.Exceptions;
 using HR_LeaveManagement.Domain;
 using MediatR;
 
-namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.CreateLeaveRequest
+namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.CreateLeaveRequest
 {
     public class CreateLeaveRequestCommandHandler : IRequestHandler<CreateLeaveRequestCommand, Unit>
     {

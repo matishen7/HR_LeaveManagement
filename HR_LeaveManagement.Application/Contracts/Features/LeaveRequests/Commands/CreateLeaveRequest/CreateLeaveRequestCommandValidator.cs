@@ -2,7 +2,7 @@
 using HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.UpdateLeaveRequest;
 using HR_LeaveManagement.Application.Contracts.Persistence;
 
-namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.CreateLeaveRequest
+namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.CreateLeaveRequest
 {
     public class CreateLeaveRequestCommandValidator : AbstractValidator<CreateLeaveRequestCommand>
     {

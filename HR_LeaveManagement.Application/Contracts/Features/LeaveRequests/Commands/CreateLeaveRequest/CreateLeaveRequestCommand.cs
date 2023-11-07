@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.CreateLeaveRequest
+namespace HR_LeaveManagement.Application.Contracts.Features.LeaveRequests.Commands.CreateLeaveRequest
 {
     public class CreateLeaveRequestCommand : BaseLeaveRequest, IRequest
     {
