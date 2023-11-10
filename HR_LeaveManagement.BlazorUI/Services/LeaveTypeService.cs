@@ -24,9 +24,10 @@ namespace HR_LeaveManagement.BlazorUI.Services
             throw new NotImplementedException();
         }
 
-        public Task<LeaveTypeVM> GetLeaveTypeDetails(int id)
+        public async Task<LeaveTypeVM> GetLeaveTypeDetails(int id)
         {
-            throw new NotImplementedException();
+            var leaveType = await _client.LeaveTypeGETAsync(id);
+            return mapper.Map<LeaveTypeVM>(leaveType);
         }
 
         public async Task<List<LeaveTypeVM>> GetLeaveTypes()
