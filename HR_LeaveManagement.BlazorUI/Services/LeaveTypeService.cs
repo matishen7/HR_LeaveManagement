@@ -29,9 +29,17 @@ namespace HR_LeaveManagement.BlazorUI.Services
 
         }
 
-        public Task<Response<Guid>> DeleteLeaveType(int id)
+        public async Task<Response<Guid>> DeleteLeaveType(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _client.LeaveAllocationDELETEAsync(id);
+                return new Response<Guid>() { Success = true };
+            }
+            catch (ApiException ex)
+            {
+                return ConvertApiExceptions<Guid>(ex);
+            }
         }
 
         public async Task<LeaveTypeVM> GetLeaveTypeDetails(int id)
