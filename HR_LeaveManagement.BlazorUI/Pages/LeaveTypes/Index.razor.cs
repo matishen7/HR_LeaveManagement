@@ -4,7 +4,7 @@ using HR_LeaveManagement.BlazorUI.Models;
 
 namespace HR_LeaveManagement.BlazorUI.Pages.LeaveTypes
 {
-    public partial class Index
+    public partial class Index : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -41,7 +41,7 @@ namespace HR_LeaveManagement.BlazorUI.Pages.LeaveTypes
             if (response.Success)
             {
                 StateHasChanged();
-            }
+           }
             else
             {
                 Message = response.Message;
