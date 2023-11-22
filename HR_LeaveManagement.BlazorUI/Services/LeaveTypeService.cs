@@ -54,9 +54,18 @@ namespace HR_LeaveManagement.BlazorUI.Services
             return mapper.Map<List<LeaveTypeVM>>(leaveTypes);
         }
 
-        public Task<Response<Guid>> UpdateLeaveType(int id, LeaveTypeVM vm)
+        public async Task<Response<Guid>> UpdateLeaveType(int id, LeaveTypeVM leaveType)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UpdateLeaveTypeCommand updateLeaveTypeCommand = mapper.Map<UpdateLeaveTypeCommand>(leaveType);
+                await _client.LeaveTypePUTAsync(id.ToString(), updateLeaveTypeCommand);
+                return new Response<Guid>() { Success = true };
+            }
+            catch (ApiException ex)
+            {
+                return ConvertApiExceptions<Guid>(ex);
+            }
         }
     }
 }
