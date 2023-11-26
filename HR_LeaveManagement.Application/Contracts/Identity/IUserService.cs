@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HR_LeaveManagement.Application.Contracts.Identity
 {
-    public interface IAuthService
+    public interface IUserService
     {
-        Task<AuthResponse> Login(AuthRequest request);
-        Task<RegistrationResponse> Register(RegistrationRequest request);
+        Task<List<Employee>> GetEmployees();
+        Task<Employee> GetEmployee(string userId);
     }
 }
