@@ -84,9 +84,34 @@ namespace HR_LeaveManagement.Identity.Services
             return jwtSecurityToken;
         }
 
-        public Task<RegistrationResponse> Register(RegistrationRequest request)
+        public async Task<RegistrationResponse> Register(RegistrationRequest request)
         {
-            throw new NotImplementedException();
+            var user = new ApplicationUser
+            {
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                UserName = request.UserName,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Employee");
+                return new RegistrationResponse() { UserId = user.Id };
+            }
+            else
+            {
+                StringBuilder str = new StringBuilder();
+                foreach (var err in result.Errors)
+                {
+                    str.AppendFormat("•{0}\n", err.Description);
+                }
+
+                throw new BadRequestException($"{str}");
+            }
         }
     }
 }
