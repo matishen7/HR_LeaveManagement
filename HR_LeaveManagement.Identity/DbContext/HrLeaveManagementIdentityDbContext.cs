@@ -5,7 +5,7 @@ namespace HR_LeaveManagement.Identity.DbContext
 {
     public class HrLeaveManagementIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public HrLeaveManagementIdentityDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<HrLeaveManagementIdentityDbContext> options)
+        public HrLeaveManagementIdentityDbContext(DbContextOptions<HrLeaveManagementIdentityDbContext> options)
         : base(options)
         {
         }
